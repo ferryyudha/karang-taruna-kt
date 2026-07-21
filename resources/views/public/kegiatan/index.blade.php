@@ -496,10 +496,12 @@
 
         calendar = new FullCalendar.Calendar(calendarEl, {
             locale: 'id',
-            initialView: window.innerWidth < 576 ? 'listMonth' : (window.innerWidth < 768 ? 'listMonth' : 'dayGridMonth'),
-            headerToolbar: window.innerWidth < 576
-                ? { left: 'prev,next', center: 'title', right: 'listMonth' }
-                : { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,listMonth' },
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,listMonth'
+            },
             buttonText: {
                 today: 'Hari Ini',
                 month: 'Bulan',
