@@ -154,6 +154,50 @@
     .mode-tab-btn.active { background: #FFFFFF; color: #1E3A8A; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border: none; }
     .mode-tab-btn.inactive { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.2); }
     .mode-tab-btn.inactive:hover { background: rgba(255,255,255,0.2); color: white; }
+
+    /* ====== MOBILE FIXES ====== */
+    @media (max-width: 767px) {
+        .kegiatan-hero { padding: 90px 0 50px; }
+
+        /* View switcher: stack vertically on phone */
+        .mode-switcher-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+        .mode-tab-btn {
+            width: 100%;
+            text-align: center;
+            padding: 12px 16px;
+        }
+
+        /* Featured card shorter on mobile */
+        .featured-completed-card { min-height: 280px; }
+        .featured-completed-info { padding: 24px; }
+        .featured-completed-info h3 { font-size: 1.2rem !important; }
+
+        /* Kegiatan card: reduce padding */
+        .kegiatan-card > div:last-child { padding: 20px !important; }
+    }
+
+    /* FullCalendar Mobile Toolbar Fix */
+    @media (max-width: 575px) {
+        .fc .fc-toolbar { flex-wrap: wrap; gap: 6px; }
+        .fc .fc-toolbar-chunk { width: 100%; display: flex; justify-content: center; }
+        .fc .fc-toolbar-title { font-size: 1rem !important; }
+        .fc .fc-button { font-size: 0.78rem !important; padding: 6px 10px !important; }
+        .fc .fc-button-group { gap: 2px; }
+        /* On very small phones, hide week view button */
+        .fc-timeGridWeek-button { display: none !important; }
+    }
+
+    @media (max-width: 767px) {
+        /* Calendar card: remove excess padding */
+        .fc-card-body-pad { padding: 12px !important; }
+        .fc .fc-toolbar-title { font-size: 1.1rem; }
+        .fc .fc-button-primary { font-size: 0.8rem !important; padding: 6px 12px !important; }
+    }
 </style>
 @endpush
 
@@ -174,7 +218,7 @@
                 </p>
                 
                 {{-- View Mode Switcher --}}
-                <div class="d-inline-flex p-1.5 rounded-3 gap-2" style="background:rgba(15,23,42,0.4); border:1px solid rgba(255,255,255,0.15);">
+                <div class="mode-switcher-wrap d-inline-flex flex-wrap p-1 rounded-3 gap-2" style="background:rgba(15,23,42,0.4); border:1px solid rgba(255,255,255,0.15);">
                     <button type="button" id="btnViewCalendar" class="mode-tab-btn active" onclick="switchMode('calendar')">
                         <i class="bi bi-calendar3 me-2"></i>Tampilan Kalender
                     </button>
@@ -225,7 +269,7 @@
 
         {{-- FullCalendar Render Area --}}
         <div class="card border-0 shadow-sm rounded-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="card-body p-4">
+            <div class="card-body p-4 fc-card-body-pad">
                 <div id="calendar"></div>
             </div>
         </div>
@@ -452,12 +496,10 @@
 
         calendar = new FullCalendar.Calendar(calendarEl, {
             locale: 'id',
-            initialView: window.innerWidth < 768 ? 'listMonth' : 'dayGridMonth',
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,listMonth'
-            },
+            initialView: window.innerWidth < 576 ? 'listMonth' : (window.innerWidth < 768 ? 'listMonth' : 'dayGridMonth'),
+            headerToolbar: window.innerWidth < 576
+                ? { left: 'prev,next', center: 'title', right: 'listMonth' }
+                : { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,listMonth' },
             buttonText: {
                 today: 'Hari Ini',
                 month: 'Bulan',
