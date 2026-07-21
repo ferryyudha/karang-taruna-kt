@@ -1,0 +1,28 @@
+# ============================================================
+# Keamanan Root — Karang Taruna KT
+# File ini melindungi file sensitif dari akses publik
+# ketika Apache dikonfigurasi dengan document root = folder ini
+# ============================================================
+
+# Blokir akses langsung ke file sensitif
+<FilesMatch "^\.env|^\.env\..+|^composer\.(json|lock)$|^package(-lock)?\.json$|^artisan$|^phpunit\.xml$|^\.gitignore$|^Makefile$|README\.md$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Blokir akses ke folder-folder internal Laravel
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Blokir akses ke folder sensitif
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor)(/.*)?$ - [F,L]
+
+    # Jika document root = root project, paksa semua request ke /public
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Sembunyikan versi server
+ServerSignature Off
