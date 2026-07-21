@@ -12,6 +12,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\LombaController;
+use App\Http\Controllers\PollingController;
+use App\Http\Controllers\AnggotaPollingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,7 @@ Route::get('/kalender', [PublicController::class, 'kalenderIndex'])->name('publi
 Route::get('/api/kalender/events', [PublicController::class, 'kalenderEvents'])->name('public.kalender.events');
 Route::get('/pengaduan', [\App\Http\Controllers\PublicPengaduanController::class, 'index'])->name('public.pengaduan');
 Route::post('/pengaduan', [\App\Http\Controllers\PublicPengaduanController::class, 'store'])->name('public.pengaduan.store');
+Route::get('/polling', [PublicController::class, 'pollingIndex'])->name('public.polling');
 
 /*
 |--------------------------------------------------------------------------
@@ -182,5 +185,17 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
     // ─── Pengaduan Warga ───────────────────────────────────────────────────
     Route::resource('pengaduan', \App\Http\Controllers\PengaduanController::class)->middleware('menu.access:pengaduan');
+
+    // ─── Polling ─────────────────────────────────────────────────────────
+    Route::resource('polling', PollingController::class)->middleware('menu.access:polling');
+    Route::get('polling/{polling}/hasil', [PollingController::class, 'hasil'])
+        ->name('polling.hasil')->middleware('menu.access:polling');
+
+    // ─── Area Anggota (semua user yang login) ──────────────────────────
+    Route::prefix('anggota-area')->name('anggota.')->group(function () {
+        Route::get('/polling', [AnggotaPollingController::class, 'index'])->name('polling');
+        Route::get('/polling/{polling}', [AnggotaPollingController::class, 'show'])->name('polling.show');
+        Route::post('/polling/{polling}/vote', [AnggotaPollingController::class, 'vote'])->name('polling.vote');
+    });
 });
 

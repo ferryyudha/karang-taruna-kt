@@ -7,6 +7,7 @@ use App\Models\Dokumentasi;
 use App\Models\Kegiatan;
 use App\Models\Pengumuman;
 use App\Models\Lomba;
+use App\Models\Polling;
 
 class PublicController extends Controller
 {
@@ -158,5 +159,19 @@ class PublicController extends Controller
         }
 
         return response()->json($events);
+    }
+
+    /**
+     * Halaman publik: daftar hasil polling yang tampil_publik & selesai
+     */
+    public function pollingIndex()
+    {
+        $daftarPolling = Polling::with(['opsi.votes', 'votes'])
+            ->where('status', 'selesai')
+            ->where('tampil_publik', true)
+            ->latest()
+            ->paginate(10);
+
+        return view('public.polling.index', compact('daftarPolling'));
     }
 }
