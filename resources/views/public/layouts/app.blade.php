@@ -2,7 +2,11 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#4154F1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>@yield('title', 'Karang Taruna')</title>
     <meta name="description" content="@yield('description', 'Karang Taruna - Organisasi Kepemudaan yang Aktif dan Berdedikasi')">
 
@@ -125,6 +129,43 @@
         }
         .back-to-top.show { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-3px); color: white; }
+
+        /* Mobile / Touch fixes */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                max-height: 80vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .navbar-collapse .nav-link {
+                border-radius: 8px;
+            }
+            .navbar-collapse .nav-link:hover {
+                background: #F1F5F9;
+            }
+        }
+        @media (max-width: 767px) {
+            .section { padding: 50px 0; }
+            .section-sm { padding: 32px 0; }
+            /* Hero section overflow */
+            section.bg-primary.text-white { overflow-x: hidden; }
+            /* Fluid images inside hero */
+            section img { max-width: 100%; }
+        }
+        @media (max-width: 575px) {
+            /* Compact footer */
+            .footer { padding-top: 32px; }
+            .footer h5 { margin-bottom: 10px; }
+            /* Card modern full width */
+            .card-modern { border-radius: 14px; }
+            /* Buttons full width in hero */
+            .d-flex.flex-wrap.gap-3 .btn,
+            .d-flex.flex-wrap.gap-3 [class*="btn"] {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+        }
     </style>
     @stack('styles')
 </head>

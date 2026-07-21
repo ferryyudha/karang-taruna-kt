@@ -74,6 +74,7 @@
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
+    flex-shrink: 0;
 }
 
 .stat-card__number {
@@ -82,6 +83,8 @@
     color: #0F172A;
     font-family: 'Poppins', sans-serif;
     line-height: 1.2;
+    /* Prevent overflow on small screens */
+    word-break: break-all;
 }
 
 .stat-card__label {
@@ -100,12 +103,13 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    white-space: nowrap;
 }
-.badge-soft--info { background: rgba(37, 99, 235, 0.1); color: #2563EB; }
-.badge-soft--success { background: rgba(22, 163, 74, 0.1); color: #16A34A; }
-.badge-soft--danger { background: rgba(220, 38, 38, 0.1); color: #DC2626; }
-.badge-soft--warning { background: rgba(217, 119, 6, 0.1); color: #D97706; }
-.badge-soft--neutral { background: #F1F5F9; color: #64748B; }
+.badge-soft--info    { background: rgba(37,  99, 235, 0.1); color: #2563EB; }
+.badge-soft--success { background: rgba(22, 163,  74, 0.1); color: #16A34A; }
+.badge-soft--danger  { background: rgba(220, 38,  38, 0.1); color: #DC2626; }
+.badge-soft--warning { background: rgba(217,119,   6, 0.1); color: #D97706; }
+.badge-soft--neutral { background: #F1F5F9;                  color: #64748B; }
 
 /* --- UI Cards --- */
 .ui-card {
@@ -114,16 +118,19 @@
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     overflow: hidden;
+    /* Ensure cards never exceed viewport */
+    min-width: 0;
 }
 .ui-card--lg {
     border-radius: 20px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
-/* --- UI Tables --- */
+/* --- UI Tables (responsive wrapper) --- */
 .ui-table {
     width: 100%;
     margin-bottom: 0;
+    /* table-layout: fixed can break responsiveness, keep auto */
 }
 .ui-table th {
     background: #F8FAFC;
@@ -134,6 +141,7 @@
     letter-spacing: 0.5px;
     padding: 12px 16px;
     border-bottom: 1px solid #E2E8F0;
+    white-space: nowrap;
 }
 .ui-table td {
     padding: 12px 16px;
@@ -141,6 +149,10 @@
     font-size: 0.88rem;
     color: #334155;
     border-bottom: 1px solid #F1F5F9;
+}
+/* Responsive table scroll container — add this around every ui-table */
+.table-responsive > .ui-table {
+    min-width: 540px;
 }
 
 /* --- Empty States --- */
@@ -167,11 +179,12 @@
 
 /* --- Typography / Section Headers --- */
 .section-title {
-    font-size: 1.85rem;
+    font-size: clamp(1.4rem, 4vw, 1.85rem);
     font-weight: 700;
     color: #0F172A;
     margin-bottom: 6px;
     font-family: 'Poppins', sans-serif;
+    line-height: 1.25;
 }
 .section-desc {
     color: #64748B;
@@ -183,3 +196,198 @@
 .stack-sm > * + * { margin-top: 8px; }
 .stack-md > * + * { margin-top: 16px; }
 .stack-lg > * + * { margin-top: 24px; }
+
+/* ============================================================
+   MOBILE / RESPONSIVE FIXES — Global
+   ============================================================ */
+
+/* Prevent horizontal overflow globally */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+img, svg, video, canvas, iframe, figure {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Touch-friendly tap targets */
+@media (max-width: 767px) {
+    /* Stat cards: reduce padding on mobile */
+    .stat-card {
+        padding: 16px;
+    }
+    .stat-card__number {
+        font-size: 1.15rem;
+    }
+    .stat-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    /* Tables: ensure horizontal scroll */
+    .table-responsive {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Badges: allow wrapping */
+    .badge-soft {
+        white-space: normal;
+    }
+
+    /* UI cards: remove excess shadow on mobile for perf */
+    .ui-card {
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        border-radius: 12px;
+    }
+    .ui-card--lg {
+        border-radius: 14px;
+    }
+
+    /* Section title smaller on mobile */
+    .section-title {
+        font-size: 1.25rem;
+    }
+    .section-desc {
+        font-size: 0.88rem;
+    }
+
+    /* Empty state compact */
+    .empty-state {
+        padding: 28px 16px;
+    }
+    .empty-state i {
+        font-size: 2rem;
+    }
+}
+
+/* Landscape phone (width 480-767) */
+@media (max-width: 575px) {
+    /* Full-width buttons on xs */
+    .btn-primary-custom,
+    .btn-edit,
+    .btn-delete {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Prevent hero section font overflow */
+    h1.display-5 {
+        font-size: clamp(1.4rem, 6vw, 2rem) !important;
+    }
+    h1.display-4 {
+        font-size: clamp(1.5rem, 7vw, 2.5rem) !important;
+    }
+}
+
+/* ============================================================
+   ADMIN LAYOUT — Mobile fixes
+   ============================================================ */
+
+/* Content area padding on mobile (complement to app.blade.php) */
+@media (max-width: 991px) {
+    /* Stack row gap reduction */
+    .row.g-5 {
+        --bs-gutter-x: 1.25rem;
+        --bs-gutter-y: 1.25rem;
+    }
+    /* Stat cards in 2 columns on tablet */
+    .col-lg-3.col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 575px) {
+    /* Stat cards full width on xs phone */
+    .col-lg-3.col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    /* Header row wrap */
+    .d-flex.justify-content-between {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    /* Filter form full width */
+    .row.g-2 > [class*='col-md-'] {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* ============================================================
+   PUBLIC LAYOUT — Mobile fixes
+   ============================================================ */
+
+/* Navbar mobile collapse button accessibility */
+.navbar-toggler {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* Nav links bigger tap target on mobile */
+@media (max-width: 991px) {
+    .navbar-custom .nav-link {
+        padding: 10px 16px !important;
+        font-size: 0.95rem;
+    }
+    .navbar-custom .nav-link.active::after {
+        display: none;
+    }
+    .btn-login-nav {
+        margin-top: 8px;
+        width: 100%;
+        text-align: center;
+        padding: 12px 24px !important;
+    }
+
+    /* Hero sections: reduce top padding when fixed navbar */
+    section[style*="margin-top"] {
+        margin-top: 56px !important;
+    }
+}
+
+/* Back-to-top smaller offset on mobile */
+@media (max-width: 575px) {
+    .back-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+    }
+    /* Footer column order */
+    footer .col-lg-4,
+    footer .col-lg-2,
+    footer .col-lg-3 {
+        margin-bottom: 16px;
+    }
+    .footer-bottom .row > div {
+        text-align: center !important;
+    }
+}
+
+/* Fix: Bootstrap table not scrolling inside card */
+.ui-card .table-responsive {
+    border-radius: 0;
+}
+
+/* Fix: object-fit for older iOS Safari */
+.object-fit-cover {
+    object-fit: cover;
+}
+
+/* Fix: flex-shrink for badge rows on small screens */
+.d-flex.gap-2 > .badge-soft {
+    flex-shrink: 0;
+}
+
+/* Safe area insets for iPhone notch / home indicator */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    body {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}

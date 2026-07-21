@@ -3,7 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1B2537">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>@yield('title', 'Dashboard') — Karang Taruna</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
@@ -295,6 +299,8 @@
         .content-area {
             padding: 28px;
             flex: 1;
+            overflow-x: hidden; /* prevent horizontal scroll on content */
+            min-width: 0;
         }
 
         /* Cards */
@@ -551,6 +557,15 @@
             .content-area {
                 padding: 16px;
             }
+            /* Topbar: hide globe icon on xs to save space */
+            .topbar-right a.topbar-icon-btn { display: none; }
+        }
+
+        @media (max-width: 575px) {
+            .content-area { padding: 12px; }
+            .topbar { padding: 0 12px; }
+            /* Prevent long breadcrumb overflow */
+            .topbar-breadcrumb { display: none; }
         }
 
         /* Pagination Styling */
