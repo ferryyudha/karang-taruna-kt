@@ -145,7 +145,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         });
     });
 
-    // ─── Inventaris ────────────────────────────────────────────────────────
+    // Inventaris 
     Route::prefix('inventaris')->name('inventaris.')->group(function () {
         // Daftar Barang
         Route::middleware('menu.access:inventaris-daftar')->group(function () {
@@ -174,7 +174,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         });
     });
 
-    // ─── Lomba ──────────────────────────────────────────────────────────────
+    // Lomba 
     Route::resource('lomba', LombaController::class)->middleware('menu.access:lomba');
     Route::post('/lomba/{lomba}/peralatan', [LombaController::class, 'storePeralatan'])->name('lomba.peralatan.store')->middleware('menu.access:lomba');
     Route::put('/lomba/peralatan/{peralatan}', [LombaController::class, 'updatePeralatan'])->name('lomba.peralatan.update')->middleware('menu.access:lomba');
@@ -183,15 +183,15 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::put('/lomba/peserta/{peserta}', [LombaController::class, 'updatePeserta'])->name('lomba.peserta.update')->middleware('menu.access:lomba');
     Route::delete('/lomba/peserta/{peserta}', [LombaController::class, 'destroyPeserta'])->name('lomba.peserta.destroy')->middleware('menu.access:lomba');
 
-    // ─── Pengaduan Warga ───────────────────────────────────────────────────
+    // Pengaduan Warga 
     Route::resource('pengaduan', \App\Http\Controllers\PengaduanController::class)->middleware('menu.access:pengaduan');
 
-    // ─── Polling ─────────────────────────────────────────────────────────
+    // Polling 
     Route::resource('polling', PollingController::class)->middleware('menu.access:polling');
     Route::get('polling/{polling}/hasil', [PollingController::class, 'hasil'])
         ->name('polling.hasil')->middleware('menu.access:polling');
 
-    // ─── Area Anggota (semua user yang login) ──────────────────────────
+    // Area Anggota (semua user yang login) 
     Route::prefix('anggota-area')->name('anggota.')->group(function () {
         Route::get('/polling', [AnggotaPollingController::class, 'index'])->name('polling');
         Route::get('/polling/{polling}', [AnggotaPollingController::class, 'show'])->name('polling.show');

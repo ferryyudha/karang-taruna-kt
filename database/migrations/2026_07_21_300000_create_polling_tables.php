@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // ── Tabel Polling Utama ──────────────────────────────────────────
+        // Tabel Polling Utama 
         Schema::create('polling', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // ── Tabel Opsi / Pilihan ─────────────────────────────────────────
+        // Tabel Opsi / Pilihan 
         Schema::create('polling_opsi', function (Blueprint $table) {
             $table->id();
             $table->foreignId('polling_id')->constrained('polling')->cascadeOnDelete();
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // ── Tabel Vote ───────────────────────────────────────────────────
+        // Tabel Vote 
         Schema::create('polling_vote', function (Blueprint $table) {
             $table->id();
             $table->foreignId('polling_id')->constrained('polling')->cascadeOnDelete();

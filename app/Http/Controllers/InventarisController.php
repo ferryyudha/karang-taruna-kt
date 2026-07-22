@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\DB;
 
 class InventarisController extends Controller
 {
-    // ═══════════════════════════════════════════════
-    //  DAFTAR INVENTARIS
-    // ═══════════════════════════════════════════════
+    // //  DAFTAR INVENTARIS
+    // 
 
     public function index(Request $request)
     {
@@ -158,9 +157,8 @@ class InventarisController extends Controller
             ->with('success', 'Barang berhasil dihapus!');
     }
 
-    // ═══════════════════════════════════════════════
-    //  KATEGORI
-    // ═══════════════════════════════════════════════
+    // //  KATEGORI
+    // 
 
     public function indexKategori()
     {
@@ -188,9 +186,8 @@ class InventarisController extends Controller
         return back()->with('success', 'Kategori berhasil dihapus!');
     }
 
-    // ═══════════════════════════════════════════════
-    //  PEMINJAMAN
-    // ═══════════════════════════════════════════════
+    // //  PEMINJAMAN
+    // 
 
     public function indexPeminjaman(Request $request)
     {

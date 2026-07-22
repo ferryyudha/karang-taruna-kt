@@ -371,7 +371,7 @@ class KeuanganController extends Controller
         $kasList = KeuanganKas::orderBy('nama')->get();
         $kategoriList = KeuanganKategori::orderBy('nama')->get();
 
-        // Calculate totals for report summary
+        // Hitung total untuk ringkasan laporan
         $totalPemasukan  = $transaksi->where('tipe', 'pemasukan')->sum('jumlah');
         $totalPengeluaran = $transaksi->where('tipe', 'pengeluaran')->sum('jumlah');
         $saldoAkhir      = $totalPemasukan - $totalPengeluaran;

@@ -559,7 +559,7 @@
 
         calendar.render();
 
-        // Check URL params for initial view (e.g. ?view=card)
+        // Periksa parameter URL untuk tampilan awal (misal ?view=card)
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('view') === 'card') {
             switchMode('card');

@@ -9,7 +9,7 @@ class InventarisMenuSeeder extends Seeder
 {
     public function run(): void
     {
-        // ── 1. Reorder menu yang sudah ada ──────────────────────────────────
+        // 1. Reorder menu yang sudah ada 
         $reorder = [
             'dashboard'   => 1,
             'anggota'     => 2,
@@ -54,7 +54,7 @@ class InventarisMenuSeeder extends Seeder
         Menu::where('slug', 'users')->update(['parent_id' => $manajemen->id]);
         Menu::where('slug', 'roles')->update(['parent_id' => $manajemen->id]);
 
-        // ── 2. Tambah menu Inventaris/Perlengkapan jika belum ada ───────────
+        // 2. Tambah menu Inventaris/Perlengkapan jika belum ada 
         $inventarisParent = Menu::firstOrCreate(
             ['slug' => 'inventaris'],
             [

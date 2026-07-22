@@ -13,7 +13,7 @@ class PollingVote extends Model
 
     protected $fillable = ['polling_id', 'polling_opsi_id', 'user_id'];
 
-    // ── Relasi ───────────────────────────────────────────────────────────
+    // Relasi 
 
     public function polling()
     {

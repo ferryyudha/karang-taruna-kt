@@ -98,9 +98,8 @@ class LombaController extends Controller
             ->with('success', 'Lomba berhasil dihapus!');
     }
 
-    // ═══════════════════════════════════════════
-    //  PERALATAN
-    // ═══════════════════════════════════════════
+    // //  PERALATAN
+    // 
 
     public function storePeralatan(Request $request, Lomba $lomba)
     {
@@ -146,9 +145,8 @@ class LombaController extends Controller
         return back()->with('success', 'Item peralatan dihapus dari checklist!');
     }
 
-    // ═══════════════════════════════════════════
-    //  PESERTA & JUARA
-    // ═══════════════════════════════════════════
+    // //  PESERTA & JUARA
+    // 
 
     public function storePeserta(Request $request, Lomba $lomba)
     {

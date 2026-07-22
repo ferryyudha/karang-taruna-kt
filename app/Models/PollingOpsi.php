@@ -13,7 +13,7 @@ class PollingOpsi extends Model
 
     protected $fillable = ['polling_id', 'teks_opsi', 'urutan'];
 
-    // ── Relasi ───────────────────────────────────────────────────────────
+    // Relasi 
 
     public function polling()
     {
@@ -25,7 +25,7 @@ class PollingOpsi extends Model
         return $this->hasMany(PollingVote::class);
     }
 
-    // ── Accessors ────────────────────────────────────────────────────────
+    // Accessors 
 
     /**
      * Jumlah vote untuk opsi ini

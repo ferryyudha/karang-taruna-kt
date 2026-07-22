@@ -23,7 +23,7 @@ class Polling extends Model
         'tampil_publik' => 'boolean',
     ];
 
-    // ── Relasi ───────────────────────────────────────────────────────────
+    // Relasi 
 
     public function opsi()
     {
@@ -40,7 +40,7 @@ class Polling extends Model
         return $this->belongsTo(User::class, 'dibuat_oleh');
     }
 
-    // ── Accessors ────────────────────────────────────────────────────────
+    // Accessors 
 
     /**
      * Jumlah user unik yang sudah vote di polling ini

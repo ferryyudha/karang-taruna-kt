@@ -18,7 +18,7 @@ class DummyDataSeeder extends Seeder
 {
     public function run(): void
     {
-        // ── 0. Pastikan Seeder Menu & User Utama Sudah Berjalan ────────────────
+        // 0. Pastikan Seeder Menu & User Utama Sudah Berjalan 
         $this->call([
             RoleMenuSeeder::class,
             UserSeeder::class,
@@ -36,7 +36,7 @@ class DummyDataSeeder extends Seeder
             return;
         }
 
-        // ── 1. Dummy Pengumuman ───────────────────────────────────────────────
+        // 1. Dummy Pengumuman 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('pengumuman')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -68,7 +68,7 @@ class DummyDataSeeder extends Seeder
             'user_id' => $adminUser->id,
         ]);
 
-        // ── 2. Dummy Kegiatan & Dokumentasi ───────────────────────────────────
+        // 2. Dummy Kegiatan & Dokumentasi 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('kegiatan')->truncate();
         DB::table('dokumentasi')->truncate();
@@ -116,7 +116,7 @@ class DummyDataSeeder extends Seeder
         ]);
 
 
-        // ── 3. Dummy Lomba (Berelasi dengan Kegiatan) ─────────────────────────
+        // 3. Dummy Lomba (Berelasi dengan Kegiatan) 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('lomba')->truncate();
         DB::table('lomba_peralatan')->truncate();
@@ -143,7 +143,7 @@ class DummyDataSeeder extends Seeder
         ]);
 
 
-        // ── 4. Dummy Keuangan (Kas, Kategori, Transaksi) ─────────────────────
+        // 4. Dummy Keuangan (Kas, Kategori, Transaksi) 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('keuangan_kas')->truncate();
         DB::table('keuangan_kategori')->truncate();
@@ -219,7 +219,7 @@ class DummyDataSeeder extends Seeder
         ]);
 
 
-        // ── 5. Dummy Inventaris (Kategori, Barang, Peminjaman) ───────────────
+        // 5. Dummy Inventaris (Kategori, Barang, Peminjaman) 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('inventaris_kategori')->truncate();
         DB::table('inventaris')->truncate();
@@ -289,7 +289,7 @@ class DummyDataSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        // ── 6. Lomba Peralatan Checklist (Berelasi dengan Lomba & Inventaris) ─
+        // 6. Lomba Peralatan Checklist (Berelasi dengan Lomba & Inventaris) 
         DB::table('lomba_peralatan')->insert([
             [
                 'lomba_id' => $lomba1->id,
@@ -314,7 +314,7 @@ class DummyDataSeeder extends Seeder
         ]);
 
 
-        // ── 7. Dummy Pengaduan Warga ──────────────────────────────────────────
+        // 7. Dummy Pengaduan Warga 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('pengaduan')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -373,7 +373,7 @@ class DummyDataSeeder extends Seeder
             ],
         ]);
 
-        // ── 8. Re-seed Polling Dummy (Memanggil Seeder Polling yang Dibuat) ───
+        // 8. Re-seed Polling Dummy (Memanggil Seeder Polling yang Dibuat) 
         $this->call(PollingDummySeeder::class);
 
         $this->command->info('=== DATABASE BERHASIL DIISI DENGAN DUMMY DATA LENGKAP ===');

@@ -224,7 +224,7 @@
                 const props = info.event.extendedProps;
                 document.getElementById('modalTitle').innerText = info.event.title.replace(/^[📍🏆]\s*/, '');
                 
-                // Set Badge
+                
                 const badge = document.getElementById('modalBadge');
                 badge.innerText = props.badge;
                 if (props.type === 'kegiatan') {

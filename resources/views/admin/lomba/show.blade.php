@@ -41,7 +41,7 @@
 </div>
 
 <div class="row g-4">
-    {{-- ═══════════════ CHECKLIST PERALATAN ═══════════════ --}}
+    {{-- CHECKLIST PERALATAN  --}}
     <div class="col-lg-7">
         <div class="card-admin">
             <div class="card-header-admin d-flex justify-content-between align-items-center">
@@ -143,7 +143,7 @@
         </div>
     </div>
 
-    {{-- ═══════════════ PESERTA & JUARA ═══════════════ --}}
+    {{-- PESERTA & JUARA  --}}
     <div class="col-lg-5">
         <div class="card-admin">
             <div class="card-header-admin d-flex justify-content-between align-items-center">
