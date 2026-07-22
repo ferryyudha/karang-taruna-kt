@@ -10,15 +10,18 @@ class KeuanganMenuSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Create Parent Menu "Keuangan"
-        $parent = Menu::create([
-            'name'      => 'Keuangan',
-            'slug'      => 'keuangan',
-            'icon'      => 'bi-wallet2',
-            'url'       => '#',
-            'order'     => 8,
-            'is_active' => true,
-        ]);
+        // 1. Dapatkan atau buat Parent Menu "Keuangan"
+        $parent = Menu::where('slug', 'keuangan')->first();
+        if (!$parent) {
+            $parent = Menu::create([
+                'name'      => 'Keuangan',
+                'slug'      => 'keuangan',
+                'icon'      => 'bi-wallet2',
+                'url'       => '#',
+                'order'     => 8,
+                'is_active' => true,
+            ]);
+        }
 
         // 2. Create Sub-menus
         $submenus = [
@@ -33,15 +36,28 @@ class KeuanganMenuSeeder extends Seeder
         $createdSubmenuIds = [];
         foreach ($submenus as $sub) {
             $sub['parent_id'] = $parent->id;
-            $menu = Menu::create($sub);
-            $createdSubmenuIds[] = $menu->id;
+            
+            $existing = Menu::where('slug', $sub['slug'])->first();
+            if (!$existing) {
+                $menu = Menu::create($sub);
+                $createdSubmenuIds[] = $menu->id;
+            } else {
+                $createdSubmenuIds[] = $existing->id;
+            }
         }
 
         // Attach to Admin role
         $admin = Role::where('slug', 'admin')->first();
         if ($admin) {
-            $admin->menus()->attach($parent->id);
-            $admin->menus()->attach($createdSubmenuIds);
+            if (!$admin->menus()->where('menu_id', $parent->id)->exists()) {
+                $admin->menus()->attach($parent->id);
+            }
+            foreach ($createdSubmenuIds as $subId) {
+                if (!$admin->menus()->where('menu_id', $subId)->exists()) {
+                    $admin->menus()->attach($subId);
+                }
+            }
         }
     }
 }
+
