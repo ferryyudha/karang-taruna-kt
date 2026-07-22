@@ -41,7 +41,7 @@
                     <div class="alert alert-danger border-0 rounded-3 mb-3">{{ session('error') }}</div>
                 @endif
 
-                <form action="{{ route('anggota.polling.vote', $polling) }}" method="POST" id="formVote">
+                <form action="{{ route('admin.anggota.polling.vote', $polling) }}" method="POST" id="formVote">
                     @csrf
                     <div class="stack-md mb-4" id="opsiGroup">
                         @foreach($polling->opsi as $opsi)
@@ -135,7 +135,7 @@
         </div>
         @endif
 
-        <a href="{{ route('anggota.polling') }}" class="btn btn-light rounded-3 fw-semibold">
+        <a href="{{ route('admin.anggota.polling') }}" class="btn btn-light rounded-3 fw-semibold">
             <i class="bi bi-arrow-left me-1"></i>Kembali ke Daftar Polling
         </a>
     </div>

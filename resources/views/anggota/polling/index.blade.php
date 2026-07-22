@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="{{ route('anggota.polling.show', $p) }}" class="btn-primary-custom">
+                <a href="{{ route('admin.anggota.polling.show', $p) }}" class="btn-primary-custom">
                     <i class="bi bi-hand-index-thumb me-2"></i>Berikan Suara
                 </a>
             </div>
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="{{ route('anggota.polling.show', $p) }}" class="btn-edit">
+                <a href="{{ route('admin.anggota.polling.show', $p) }}" class="btn-edit">
                     <i class="bi bi-eye me-1"></i>Lihat Hasil
                 </a>
             </div>
@@ -97,7 +97,7 @@
                     {{ $p->selesai_at->format('d M Y') }}
                 </div>
             </div>
-            <a href="{{ route('anggota.polling.show', $p) }}" class="btn btn-sm btn-outline-primary rounded-3">
+            <a href="{{ route('admin.anggota.polling.show', $p) }}" class="btn btn-sm btn-outline-primary rounded-3">
                 <i class="bi bi-bar-chart me-1"></i>Lihat Hasil
             </a>
         </div>
