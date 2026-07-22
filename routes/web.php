@@ -30,8 +30,8 @@ Route::get('/galeri', [PublicController::class, 'galeri'])->name('public.galeri'
 Route::get('/lomba', [PublicController::class, 'lombaIndex'])->name('public.lomba');
 Route::get('/kalender', [PublicController::class, 'kalenderIndex'])->name('public.kalender');
 Route::get('/api/kalender/events', [PublicController::class, 'kalenderEvents'])->name('public.kalender.events');
-Route::get('/pengaduan', [\App\Http\Controllers\PublicPengaduanController::class, 'index'])->name('public.pengaduan');
-Route::post('/pengaduan', [\App\Http\Controllers\PublicPengaduanController::class, 'store'])->name('public.pengaduan.store');
+Route::get('/pengaduan', [\App\Http\Controllers\PublicPengaduanController::class, 'index'])->middleware('throttle:20,1')->name('public.pengaduan');
+Route::post('/pengaduan', [\App\Http\Controllers\PublicPengaduanController::class, 'store'])->middleware('throttle:5,1')->name('public.pengaduan.store');
 Route::get('/polling', [PublicController::class, 'pollingIndex'])->name('public.polling');
 
 /*
