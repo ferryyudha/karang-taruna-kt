@@ -127,6 +127,12 @@ Aplikasi web manajemen **Karang Taruna** dibangun menggunakan framework **Larave
    npm run dev
    ```
 
+8. **Pengisian Data Demo (Opsional):**
+   Untuk mempermudah pengujian dengan data awal yang realistis (terisi kegiatan, pengumuman, keuangan, inventaris, lomba, pengaduan warga, serta polling dengan grafiknya), jalankan:
+   ```bash
+   php artisan db:seed --class=DummyDataSeeder
+   ```
+
 ---
 
 ## 🔑 Informasi Login Awal
@@ -135,7 +141,7 @@ Aplikasi web manajemen **Karang Taruna** dibangun menggunakan framework **Larave
   - **Super Admin:** `admin@karangtaruna.com`
   - **Pengurus:** `pengurus@karangtaruna.com`
 - **Password Akun Bawaan:**
-  Password dibuat secara acak demi keamanan setiap kali perintah `php artisan migrate --seed` dijalankan dan **hanya ditampilkan sekali pada terminal**. Catat password tersebut dari output terminal saat proses seeding selesai dilakukan.
+  Password dibuat secara acak demi keamanan setiap kali perintah `php artisan migrate --seed` atau `DummyDataSeeder` dijalankan dan **hanya ditampilkan sekali pada terminal**. Catat password tersebut dari output terminal saat proses seeding selesai dilakukan.
 - ⚠️ **Keamanan:** Jangan pernah menyimpan password asli di dalam berkas dokumentasi ini karena repositori ini bersifat publik.
 
 ---
@@ -151,3 +157,4 @@ Aplikasi web manajemen **Karang Taruna** dibangun menggunakan framework **Larave
 | Galeri | `/galeri` | Dokumentasi foto kegiatan |
 | Kalender | `/kalender` | Kalender terpadu kegiatan & lomba |
 | Pengaduan | `/pengaduan` | Formulir pengaduan warga |
+| Polling Warga | `/polling` | Hasil polling yang dipublikasikan secara transparan |
