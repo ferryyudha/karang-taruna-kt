@@ -90,7 +90,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8" data-aos="fade-right">
-                <span class="badge-soft badge-soft--warning mb-2 fs-6">
+                <span class="badge mb-2 px-3 py-2 rounded-pill fw-semibold text-white fs-6" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);">
                     📅 Agenda Terpadu
                 </span>
                 <h1 class="section-title text-white">

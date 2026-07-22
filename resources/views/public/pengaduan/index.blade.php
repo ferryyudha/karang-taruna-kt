@@ -9,7 +9,7 @@
     <div class="container py-4">
         <div class="row align-items-center">
             <div class="col-lg-7 text-center text-lg-start" data-aos="fade-right">
-                <span class="badge-soft badge-soft--info mb-3 fs-6">
+                <span class="badge mb-3 px-3 py-2 rounded-pill fw-semibold text-white fs-6" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);">
                     <i class="bi bi-shield-check me-1"></i>Layanan Resmi Karang Taruna
                 </span>
                 <h1 class="fw-bold display-5 mb-3">Layanan Pengaduan & Aspirasi Warga</h1>

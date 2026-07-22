@@ -5,7 +5,7 @@
 @section('content')
 <section class="bg-primary text-white py-5 position-relative overflow-hidden" style="margin-top:60px;background:linear-gradient(135deg,#1E3A8A,#4154F1,#7C3AED)!important;">
     <div class="container py-4">
-        <span class="badge-soft badge-soft--info mb-3 d-inline-block">
+        <span class="badge mb-3 px-3 py-2 rounded-pill fw-semibold text-white d-inline-block" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);">
             <i class="bi bi-bar-chart-fill me-1"></i>Hasil Polling Publik
         </span>
         <h1 class="section-title text-white">Polling & Voting Anggota</h1>
