@@ -13,9 +13,8 @@
             <div class="row g-3">
                 <div class="col-md-4">
                     <label class="form-label-admin">Kode Barang</label>
-                    <input type="text" name="kode" class="form-control form-control-admin @error('kode') is-invalid @enderror"
-                        value="{{ old('kode', $inventaris->kode) }}">
-                    @error('kode')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    <input type="text" name="kode" class="form-control form-control-admin"
+                        value="{{ $inventaris->kode }}" readonly style="background-color: #e9ecef; cursor: not-allowed;">
                 </div>
                 <div class="col-md-8">
                     <label class="form-label-admin">Nama Barang <span class="text-danger">*</span></label>

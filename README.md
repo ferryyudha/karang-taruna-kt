@@ -17,7 +17,7 @@ Aplikasi web manajemen **Karang Taruna** dibangun menggunakan framework **Larave
 - Pengelompokan kegiatan secara dinamis berdasarkan kategori (*Lingkungan, Olahraga, Workshop, Sosial*).
 - Pengumuman penting terintegrasi dan dapat dipasang di halaman publik dengan toggle layout grid/list.
 
-### 3. 🏆 Modul Lomba & Perlombaan (Baru!)
+### 3. 🏆 Modul Lomba & Perlombaan
 - Pencatatan daftar lomba yang dikaitkan dengan kegiatan induk (misal: Lomba 17 Agustusan).
 - **Otomatisasi Status Lomba:** Status (`Persiapan`, `Berlangsung`, `Selesai`) dihitung secara otomatis berdasarkan tanggal lomba.
 - **Manajemen Perlengkapan & Checklist:** Memantau ketersediaan barang inventaris untuk menunjang kebutuhan lomba secara real-time.
@@ -32,13 +32,33 @@ Aplikasi web manajemen **Karang Taruna** dibangun menggunakan framework **Larave
 - Pencatatan transaksi **Pemasukan** dan **Pengeluaran** lengkap dengan bukti lampiran foto.
 - Kalkulasi saldo kas secara otomatis dan real-time.
 - Ekspor laporan bulanan ke format **Microsoft Excel (.csv)** dan fitur cetak laporan langsung dari browser (print-friendly).
+- **Iuran Anggota (Baru!):** Pencatatan tagihan iuran rutin per anggota, status lunas/belum lunas terpantau otomatis dan terhubung langsung ke buku kas.
 
 ### 6. 📦 Modul Inventaris & Perlengkapan Barang RT
 - Pendataan barang inventaris milik RT (tenda, kursi, sound system, piring, dll) lengkap dengan kategori, lokasi penyimpanan, dan kondisi barang.
 - Manajemen peminjaman barang oleh warga dengan pembaruan stok otomatis.
 - Deteksi keterlambatan pengembalian barang secara otomatis.
 
-### 7. 🔐 Keamanan & Hak Akses
+### 7. 📢 Pengaduan Warga (Baru!)
+- Formulir pengaduan publik bagi warga untuk melaporkan masalah lingkungan (jalan rusak, sampah, keamanan, dll) tanpa perlu login.
+- Pengurus dapat memantau dan memperbarui status laporan (`Diterima` → `Diproses` → `Selesai`) melalui panel admin.
+- Riwayat pengaduan tersimpan rapi dan dapat ditelusuri kapan saja.
+
+### 8. 📅 Kalender Kegiatan Terpadu (Baru!)
+- Tampilan kalender bulanan publik yang menggabungkan seluruh jadwal **Kegiatan** dan **Lomba** dalam satu tampilan interaktif.
+- Warga dapat melihat rangkaian acara mendatang secara visual tanpa perlu membuka halaman terpisah.
+
+### 9. 🗳️ Voting & Polling (Baru!)
+- Pengurus dapat membuat polling untuk pengambilan keputusan bersama (misal: tema acara 17 Agustus, jadwal kegiatan rutin, dsb).
+- Mendukung tipe pilihan tunggal (*single choice*) maupun pilihan ganda (*multiple choice*).
+- Setiap anggota hanya dapat memberikan 1 suara per polling untuk menjaga validitas hasil.
+- Hasil voting ditampilkan secara visual (grafik persentase) dan dapat diatur agar tampil ke halaman publik jika pengurus ingin transparan kepada warga.
+
+### 10. 📊 Dashboard Statistik (Baru!)
+- Ringkasan data organisasi secara menyeluruh dalam satu halaman: jumlah anggota aktif, saldo kas, kegiatan berjalan, hingga status iuran dan pengaduan terbaru.
+- Membantu pengurus memantau kondisi organisasi secara sekilas tanpa perlu membuka tiap modul satu per satu.
+
+### 11. 🔐 Keamanan & Hak Akses
 - Pembatasan hak akses berbasis **Multi-Role** (Super Admin, Pengurus, dsb) dengan pengaturan menu dinamis.
 - Perlindungan brute-force login menggunakan throttling (maksimal 5 kali percobaan per menit).
 - **Perlindungan Berkas Sensitif:** Dilengkapi berkas `.htaccess` ganda (pada root project dan folder public) untuk memblokir akses langsung ke file `.env` atau folder internal Laravel.
@@ -114,6 +134,20 @@ Aplikasi web manajemen **Karang Taruna** dibangun menggunakan framework **Larave
 - **Email Akun Bawaan:**
   - **Super Admin:** `admin@karangtaruna.com`
   - **Pengurus:** `pengurus@karangtaruna.com`
-- **Password Akun Bawaan:** 
+- **Password Akun Bawaan:**
   Password dibuat secara acak demi keamanan setiap kali perintah `php artisan migrate --seed` dijalankan dan **hanya ditampilkan sekali pada terminal**. Catat password tersebut dari output terminal saat proses seeding selesai dilakukan.
 - ⚠️ **Keamanan:** Jangan pernah menyimpan password asli di dalam berkas dokumentasi ini karena repositori ini bersifat publik.
+
+---
+
+## 🗺️ Peta Halaman Publik
+| Halaman | Route | Keterangan |
+|---|---|---|
+| Beranda | `/` | Ringkasan pengumuman & kegiatan terbaru |
+| Pengumuman | `/pengumuman` | Daftar & detail pengumuman |
+| Kegiatan | `/kegiatan` | Daftar & detail kegiatan |
+| Lomba | `/lomba` | Daftar lomba & podium juara |
+| Anggota | `/anggota` | Struktur kepengurusan |
+| Galeri | `/galeri` | Dokumentasi foto kegiatan |
+| Kalender | `/kalender` | Kalender terpadu kegiatan & lomba |
+| Pengaduan | `/pengaduan` | Formulir pengaduan warga |

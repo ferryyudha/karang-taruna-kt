@@ -49,6 +49,46 @@ class InventarisController extends Controller
 
     public function store(Request $request)
     {
+        // Auto-generate kode jika kosong atau mengandung placeholder (Auto)
+        $rawKode = $request->input('kode');
+        if (empty($rawKode) || str_contains($rawKode, '(Auto)')) {
+            $prefix = 'GEN';
+            if ($request->filled('kategori_id')) {
+                $kategori = InventarisKategori::find($request->kategori_id);
+                if ($kategori) {
+                    $name = strtoupper(preg_replace('/[^A-Za-z0-9\s]/', '', $kategori->nama));
+                    if (str_contains($name, 'LOGISTIK')) {
+                        $prefix = 'LOG';
+                    } elseif (str_contains($name, 'OLAHRAGA')) {
+                        $prefix = 'OLR';
+                    } else {
+                        $words = array_filter(explode(' ', $name));
+                        if (count($words) >= 3) {
+                            $prefix = substr($words[0], 0, 1) . substr($words[1], 0, 1) . substr($words[2], 0, 1);
+                        } else if (count($words) == 2) {
+                            $prefix = substr($words[0], 0, 2) . substr($words[1], 0, 1);
+                        } else {
+                            $prefix = substr($words[0] ?? 'GEN', 0, 3);
+                        }
+                    }
+                }
+            }
+
+            // Temukan nomor urut terakhir untuk prefix ini
+            $likePattern = 'INV-' . $prefix . '-%';
+            $lastItem = Inventaris::where('kode', 'like', $likePattern)
+                ->orderBy('kode', 'desc')
+                ->first();
+
+            $nextNum = 1;
+            if ($lastItem && preg_match('/-(\d+)$/', $lastItem->kode, $matches)) {
+                $nextNum = (int)$matches[1] + 1;
+            }
+
+            $generatedKode = 'INV-' . $prefix . '-' . str_pad($nextNum, 3, '0', STR_PAD_LEFT);
+            $request->merge(['kode' => $generatedKode]);
+        }
+
         $validated = $request->validate([
             'kode'              => 'nullable|string|max:50|unique:inventaris,kode',
             'nama'              => 'required|string|max:255',
@@ -66,11 +106,6 @@ class InventarisController extends Controller
 
         if ($request->hasFile('foto')) {
             $validated['foto'] = ImageUploadService::uploadThumbnail($request->file('foto'), 'inventaris');
-        }
-
-        // Auto-generate kode jika kosong
-        if (empty($validated['kode'])) {
-            $validated['kode'] = 'INV-' . strtoupper(Str::random(6));
         }
 
         Inventaris::create($validated);

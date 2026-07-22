@@ -12,10 +12,9 @@
             @csrf
             <div class="row g-3">
                 <div class="col-md-4">
-                    <label class="form-label-admin">Kode Barang <small class="text-muted">(opsional, auto-generate)</small></label>
-                    <input type="text" name="kode" class="form-control form-control-admin @error('kode') is-invalid @enderror"
-                        placeholder="e.g. INV-001" value="{{ old('kode') }}">
-                    @error('kode')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    <label class="form-label-admin">Kode Barang</label>
+                    <input type="text" name="kode" id="kodeBarangInput" class="form-control form-control-admin"
+                        value="INV-GEN-XXX (Auto)" readonly style="background-color: #e9ecef; cursor: not-allowed;">
                 </div>
                 <div class="col-md-8">
                     <label class="form-label-admin">Nama Barang <span class="text-danger">*</span></label>
@@ -77,3 +76,40 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const kategoriSelect = document.querySelector('select[name="kategori_id"]');
+        const kodeInput = document.getElementById('kodeBarangInput');
+        
+        if (kategoriSelect && kodeInput) {
+            kategoriSelect.addEventListener('change', function () {
+                if (this.value === '') {
+                    kodeInput.value = 'INV-GEN-XXX (Auto)';
+                    return;
+                }
+                const selectedText = this.options[this.selectedIndex].text.toUpperCase();
+                let prefix = 'GEN';
+                
+                if (selectedText.includes('LOGISTIK')) {
+                    prefix = 'LOG';
+                } else if (selectedText.includes('OLAHRAGA')) {
+                    prefix = 'OLR';
+                } else {
+                    const cleanText = selectedText.replace(/[^A-Z0-9\s]/g, '');
+                    const words = cleanText.split(' ').filter(w => w !== '');
+                    if (words.length >= 3) {
+                        prefix = (words[0][0] || '') + (words[1][0] || '') + (words[2][0] || '');
+                    } else if (words.length === 2) {
+                        prefix = (words[0].substring(0, 2) || '') + (words[1][0] || '');
+                    } else if (words.length === 1) {
+                        prefix = words[0].substring(0, 3) || 'GEN';
+                    }
+                }
+                kodeInput.value = `INV-${prefix}-XXX (Auto)`;
+            });
+        }
+    });
+</script>
+@endpush

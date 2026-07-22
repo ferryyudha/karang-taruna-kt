@@ -189,6 +189,32 @@
             box-shadow: 0 4px 15px rgba(65, 84, 241, 0.3);
         }
 
+        /* Submenu Styling to create nesting hierarchy */
+        .collapse .sidebar-link {
+            background: transparent !important;
+            box-shadow: none !important;
+            color: #94A3B8 !important;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0 !important;
+            padding-left: 16px !important;
+            margin: 2px 10px 2px 18px !important;
+            font-size: 0.83rem !important;
+            transition: all 0.2s ease;
+        }
+
+        .collapse .sidebar-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-left-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .collapse .sidebar-link.active {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-left-color: #4154F1 !important;
+            font-weight: 600;
+        }
+
         .sidebar-link[aria-expanded="true"] .toggle-arrow {
             transform: rotate(180deg);
         }
