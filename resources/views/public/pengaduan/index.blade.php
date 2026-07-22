@@ -85,13 +85,13 @@
                 </div>
                 <div>
                     @if($trackResult->status === 'diterima')
-                        <span class="badge-soft badge-soft--warning"><i class="bi bi-clock me-1"></i>DITERIMA (MENUNGGU)</span>
+                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill"><i class="bi bi-clock me-1"></i>DITERIMA (MENUNGGU)</span>
                     @elseif($trackResult->status === 'diproses')
-                        <span class="badge-soft badge-soft--info"><i class="bi bi-gear-wide-connected me-1"></i>SEDANG DIPROSES</span>
+                        <span class="badge bg-info text-dark px-3 py-2 rounded-pill"><i class="bi bi-gear-wide-connected me-1"></i>SEDANG DIPROSES</span>
                     @elseif($trackResult->status === 'selesai')
-                        <span class="badge-soft badge-soft--success"><i class="bi bi-check-circle me-1"></i>SELESAI</span>
+                        <span class="badge bg-success text-white px-3 py-2 rounded-pill"><i class="bi bi-check-circle me-1"></i>SELESAI</span>
                     @else
-                        <span class="badge-soft badge-soft--danger"><i class="bi bi-x-circle me-1"></i>DITOLAK</span>
+                        <span class="badge bg-danger text-white px-3 py-2 rounded-pill"><i class="bi bi-x-circle me-1"></i>DITOLAK</span>
                     @endif
                 </div>
             </div>
