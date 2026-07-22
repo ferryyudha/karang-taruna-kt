@@ -122,7 +122,7 @@
     <div class="col-6 col-lg-3">
         <div class="stat-card stat-card--danger d-flex align-items-center gap-3">
             <div class="stat-icon">
-                <i class="bi bi-chat-left-exclamation-fill"></i>
+                <i class="bi bi-exclamation-circle-fill"></i>
             </div>
             <div>
                 <div class="stat-card__number">
