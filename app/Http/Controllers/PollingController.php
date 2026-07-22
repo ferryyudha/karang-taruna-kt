@@ -156,6 +156,13 @@ class PollingController extends Controller
         $totalVotes = $polling->votes()->count();
         $totalVoter = $polling->votes()->distinct('user_id')->count('user_id');
 
-        return view('admin.polling.hasil', compact('polling', 'totalVotes', 'totalVoter'));
+        // Dapatkan semua user aktif yang belum melakukan voting
+        $votedUserIds = $polling->votes()->pluck('user_id')->unique()->toArray();
+        $belumVote = \App\Models\User::whereNotIn('id', $votedUserIds)
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.polling.hasil', compact('polling', 'totalVotes', 'totalVoter', 'belumVote'));
     }
 }
